@@ -1,7 +1,7 @@
 import React from "react";
 import { Navbar, Container, Nav, NavDropdown } from "react-bootstrap";
 import logo from "../../Asset/logo.png";
-import { Navigate, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
 export default function BlogNavbar() {
   const navigate = useNavigate();
@@ -29,18 +29,13 @@ export default function BlogNavbar() {
               title="Dropdown"
               menuVariant="dark"
             >
-              <NavDropdown.Item href="#action/3.1">
+              <NavDropdown.Item onClick={() => navigate("/me")}>
                 Your Profile
               </NavDropdown.Item>
-              <NavDropdown.Item href="#action/3.2">
-                Another action
-              </NavDropdown.Item>
-              <NavDropdown.Item href="#action/3.3">Something</NavDropdown.Item>
+              <NavDropdown.Item>Another action</NavDropdown.Item>
+              <NavDropdown.Item>Something</NavDropdown.Item>
               <NavDropdown.Divider />
-              <NavDropdown.Item
-                href="#action/3.4"
-                onClick={() => removeToken()}
-              >
+              <NavDropdown.Item onClick={() => removeToken()}>
                 LogOut
               </NavDropdown.Item>
             </NavDropdown>

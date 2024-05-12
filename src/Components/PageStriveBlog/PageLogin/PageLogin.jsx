@@ -29,9 +29,10 @@ export default function PageLogin() {
       if (response.ok) {
         console.log("Login riuscito");
         // RECUPERO DEL TOKEN DA SALVARE NELLO STORAGE
-        const backToken = await response.json();
-        const userToken = backToken.token;
-        localStorage.setItem("userToken", userToken);
+        const { token, _id } = await response.json();
+
+        localStorage.setItem("userToken", token);
+        localStorage.setItem("userId", _id);
 
         //NAVIGO ALLA HOMEPAGE DEI BLOG
         navigate("/home");

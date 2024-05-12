@@ -1,7 +1,6 @@
 import React, { useContext } from "react";
 import { Row, Col } from "react-bootstrap";
 import { BlogCard } from "../BlogCard/BlogCard";
-// import posts from "../../../data/posts.json";
 import { GetBlog } from "../../../Context/GetBlogProvider.jsx";
 
 export const BlogList = (props) => {
@@ -17,7 +16,7 @@ export const BlogList = (props) => {
               marginBottom: 50,
             }}
           >
-            <BlogCard key={post.title} {...post} />
+            <BlogCard key={data.title} {...data} />
           </Col>
         ))}
     </Row>
