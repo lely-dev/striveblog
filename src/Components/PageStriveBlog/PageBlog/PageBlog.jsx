@@ -1,40 +1,35 @@
-import React, { useContext } from "react";
-import { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { Container, Image } from "react-bootstrap";
-import { useNavigate, useParams } from "react-router-dom";
 import BlogAuthor from "../../BlogItem/BlogAuthor/BlogAuthor.jsx";
-import LikeBlog from "../../likes/LikeBlog";
+import LikeBlog from "../../likes/LikeBlog.jsx";
 import "./PageBlog.css";
+import { GetBlog } from "../../../Context/GetBlogProvider.jsx";
+import { useParams } from "react-router-dom";
 import BlogNavbar from "../../BlogNavbar/BlogNavbar.jsx";
 import BlogFooter from "../../BlogFooter/BlogFooter.jsx";
-import { GetBlog } from "../../../Context/GetBlogProvider.jsx";
 
-const PageBlog = (props) => {
+const Blog = () => {
   const [blog, setBlog] = useState({});
   const [loading, setLoading] = useState(true);
-  const params = useParams();
-  const navigate = useNavigate();
   const { data } = useContext(GetBlog);
-  console.log(data);
+  const params = useParams();
 
   useEffect(() => {
-    if (data) {
-      const { id } = params;
-      const blog = data.find((post) => post._id.toString() === id);
-
-      if (blog) {
-        setBlog(blog);
-        setLoading(false);
-      } else {
-        navigate("/404");
-      }
+    const { id } = params;
+    // console.log("ID del blog dalla URL:", id);
+    const blogItem = data.find((blog) => blog._id === id);
+    // console.log(data);
+    if (blogItem) {
+      setBlog(blogItem);
+      setLoading(false);
+    } else {
+      // navigate("/404");
     }
-  }, [data]);
+  }, [params, data]); // Aggiungo params e data come dipendenze per ricalcolare l'effetto quando cambiano
 
   if (loading) {
     return <div>loading</div>;
   } else {
-    console.log(blog);
     return (
       <>
         <BlogNavbar />
@@ -45,11 +40,13 @@ const PageBlog = (props) => {
 
             <div className="blog-details-container">
               <div className="blog-details-author">
-                <BlogAuthor {...blog.author} />
+                <BlogAuthor {...data.author} />
               </div>
               <div className="blog-details-info">
                 <div>{blog.createdAt}</div>
-                {/* <div>{`lettura da ${blog.readTime.value} ${blog.readTime.unit}`}</div> */}
+                {blog.readTime && (
+                  <div>{`lettura da ${blog.readTime.value} ${blog.readTime.unit}`}</div>
+                )}
                 <div
                   style={{
                     marginTop: 20,
@@ -73,4 +70,4 @@ const PageBlog = (props) => {
   }
 };
 
-export default PageBlog;
+export default Blog;

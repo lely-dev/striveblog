@@ -1,13 +1,13 @@
 import React from "react";
 import BlogNavbar from "../../BlogNavbar/BlogNavbar";
 import BlogFooter from "../../BlogFooter/BlogFooter";
-import { Button, Row, Col } from "react-bootstrap";
+import { Button, Row, Col, Container } from "react-bootstrap";
 import { Link } from "react-router-dom";
 import { GetBlog } from "../../../Context/GetBlogProvider.jsx";
 import { useContext, useEffect, useState } from "react";
 import { BlogCard } from "../../BlogItem/BlogCard/BlogCard.jsx";
 
-const getUrl = "http://localhost:3010/blogPosts";
+const getUrl = "http://localhost:3010/blogPosts/me";
 
 export default function MePage() {
   const { data } = useContext(GetBlog);
@@ -41,38 +41,50 @@ export default function MePage() {
   return (
     <>
       <BlogNavbar />
-      <Button
-        as={Link}
-        to="/new"
-        className="blog-navbar-add-button bg-dark"
-        size="lg"
-      >
-        <svg
-          xmlns="http://www.w3.org/2000/svg"
-          width="16"
-          height="16"
-          fill="currentColor"
-          className="bi bi-plus-lg"
-          viewBox="0 0 16 16"
-        >
-          <path d="M8 0a1 1 0 0 1 1 1v6h6a1 1 0 1 1 0 2H9v6a1 1 0 1 1-2 0V9H1a1 1 0 0 1 0-2h6V1a1 1 0 0 1 1-1z" />
-        </svg>
-        Nuovo Articolo
-      </Button>
-      <Row>
-        {userBlogs &&
-          userBlogs.map((post, i) => (
-            <Col
-              key={`item-${i}`}
-              md={4}
-              style={{
-                marginBottom: 50,
-              }}
+      <Container>
+        <Row className="my-4">
+          <Col
+            style={{
+              display: "flex",
+              justifyContent: "center",
+              alignItems: "center",
+            }}
+          >
+            <Button
+              as={Link}
+              to="/new"
+              className="blog-navbar-add-button bg-dark"
+              size="lg"
             >
-              <BlogCard key={post.title} {...post} />
-            </Col>
-          ))}
-      </Row>
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                width="16"
+                height="16"
+                fill="currentColor"
+                className="bi bi-plus-lg"
+                viewBox="0 0 16 16"
+              >
+                <path d="M8 0a1 1 0 0 1 1 1v6h6a1 1 0 1 1 0 2H9v6a1 1 0 1 1-2 0V9H1a1 1 0 0 1 0-2h6V1a1 1 0 0 1 1-1z" />
+              </svg>
+              Nuovo Articolo
+            </Button>
+          </Col>
+        </Row>
+        <Row className="my-5">
+          {userBlogs &&
+            userBlogs.map((post, i) => (
+              <Col
+                key={`item-${i}`}
+                md={4}
+                style={{
+                  marginBottom: 50,
+                }}
+              >
+                <BlogCard key={post.title} {...post} />
+              </Col>
+            ))}
+        </Row>
+      </Container>
       <BlogFooter />
     </>
   );

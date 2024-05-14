@@ -6,7 +6,7 @@ import "./BlogCard.css";
 
 export const BlogCard = (props) => {
   const { title, cover, author, _id } = props;
-
+  // console.log(props);
   return (
     <Link to={`/blog/${_id}`} className="blog-link">
       <Card className="blog-card">
@@ -15,7 +15,7 @@ export const BlogCard = (props) => {
           <Card.Title>{title}</Card.Title>
         </Card.Body>
         <Card.Footer>
-          <BlogAuthor {...author} />
+          <BlogAuthor authorId={author} />
         </Card.Footer>
       </Card>
     </Link>

@@ -27,12 +27,16 @@ export default function NewBlog() {
     try {
       const newImg = new FormData();
       newImg.append("cover", file);
+      const token = localStorage.getItem("userToken");
 
       if (idBlog) {
         const response = await fetch(
           `http://localhost:3010/blogPosts/${idBlog}/cover`,
           {
             method: "PATCH",
+            headers: {
+              Authorization: `Bearer ${token}`,
+            },
             body: newImg,
           }
         );
@@ -67,11 +71,6 @@ export default function NewBlog() {
         unit: minute,
       },
       content: content,
-      author: {
-        // Aggiungi il campo author con i dati dell'autore
-        name: "Nome Autore", // Assicurati di avere i dati dell'autore qui
-        avatar: "URL avatar autore", // Assicurati di avere i dati dell'autore qui
-      },
     };
 
     // CHIAMATA POST DEL NUOVO BLOG

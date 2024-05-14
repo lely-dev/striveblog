@@ -15,12 +15,13 @@ export default function BlogNavbar() {
     <>
       <Navbar className="bg-secondary p-4" sticky="top">
         <Container>
-          <Navbar.Brand href="#home">
+          <Navbar.Brand>
             <img
               src={logo}
               height="50"
               className="d-inline-block align-top"
               alt="React Bootstrap logo"
+              onClick={() => navigate("/home")}
             />
           </Navbar.Brand>
           <Nav>

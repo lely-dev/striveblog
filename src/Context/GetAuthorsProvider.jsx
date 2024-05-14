@@ -1,11 +1,11 @@
 import React, { createContext } from "react";
 import { useState, useEffect } from "react";
 
-export const GetBlog = createContext(null);
+export const GetAuthors = createContext(null);
 
-const getUrl = "http://localhost:3010/blogPosts";
+const getUrl = "http://localhost:3010/authors";
 
-export default function GetBlogProvider({ children }) {
+export default function GetAuthorsProvider({ children }) {
   const [data, setData] = useState([]);
 
   // FUNZIONE GET PER I BLOG
@@ -45,6 +45,8 @@ export default function GetBlogProvider({ children }) {
   }, []);
 
   return (
-    <GetBlog.Provider value={{ data, fetchData }}>{children}</GetBlog.Provider>
+    <GetAuthors.Provider value={{ data, fetchData }}>
+      {children}
+    </GetAuthors.Provider>
   );
 }

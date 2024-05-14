@@ -16,7 +16,7 @@ export const BlogList = (props) => {
               marginBottom: 50,
             }}
           >
-            <BlogCard key={data.title} {...data} />
+            <BlogCard key={post._id} {...post} />
           </Col>
         ))}
     </Row>

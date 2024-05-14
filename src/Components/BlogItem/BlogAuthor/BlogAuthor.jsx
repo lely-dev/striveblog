@@ -1,9 +1,21 @@
-import React from "react";
+import React, { useContext } from "react";
 import { Col, Image, Row } from "react-bootstrap";
 import "./BlogAuthor.css";
+import { GetAuthors } from "../../../Context/GetAuthorsProvider";
 
 const BlogAuthor = (props) => {
-  const { name, avatar } = props;
+  const { data } = useContext(GetAuthors);
+
+  const { authorId } = props;
+
+  const author = data.find((author) => author._id === authorId);
+
+  if (!author) return null;
+
+  const { nome, avatar } = author;
+
+  console.log(author);
+
   return (
     <>
       <Row>
@@ -12,7 +24,7 @@ const BlogAuthor = (props) => {
         </Col>
         <Col>
           <div>di</div>
-          <h6>{name}</h6>
+          <h6>{nome}</h6>
         </Col>
       </Row>
     </>

@@ -6,12 +6,16 @@ import PageLogin from './Components/PageStriveBlog/PageLogin/PageLogin.jsx';
 import MePage from './Components/PageStriveBlog/MePage/MePage.jsx';
 import NewBlog from './Components/PageStriveBlog/NewBlog/NewBlog.jsx';
 import AuthUserProvider from './Context/AuthUserProvider.jsx';
+import GetBlogProvider from './Context/GetBlogProvider.jsx';
+import GetAuthorsProvider from './Context/GetAuthorsProvider.jsx';
 
 
 function App() {
   return (
     <>
     <AuthUserProvider>
+      <GetAuthorsProvider>
+        <GetBlogProvider>
     <BrowserRouter>
     <Routes>
     <Route  path='/' element={<PageLogin />} />
@@ -21,6 +25,8 @@ function App() {
       <Route path='/new' element={<NewBlog />} />
     </Routes>
     </BrowserRouter>
+    </GetBlogProvider>
+    </GetAuthorsProvider>
     </AuthUserProvider>
     </>
   );
